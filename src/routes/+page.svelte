@@ -1,35 +1,32 @@
-
-
-
 <script lang="ts">
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
-	import * as appwrite from '$lib/appwrite'
-	import type {Models} from 'appwrite'
-	import type { PageData } from './$types';
-	import type { Post } from '$lib/types/Post';
-	import PostsList from '$lib/components/PostsList/index.svelte'
-	export let data: PageData;
-	const posts: Post[] = data.posts.documents;
-	const postCount: number = data.posts.total;
-	let currentUser: Models.User<Models.Preferences> | null | undefined = null;
-	try {
-		appwrite.default.accounts.get().then((s) => {
-			
-			currentUser = s;
-		}).catch((e) => console.error(e))
-		
-	} catch (e) {
-		console.error(e);
-	}
+	import { getContext } from 'svelte';
 
-	//console.log(appwrite.default.accounts.get())
+	import type { Posts } from '$lib/types/Post';
+	import { createQuery } from '@tanstack/svelte-query';
+	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import PostsList from '$lib/components/PostsList/index.svelte';
+	import type { User } from '$lib/types/User';
+	import type { Writable } from 'svelte/store';
+	let currentUser = getContext<Writable<User | null>>('currentUser');
+
+	const query = createQuery<Posts>({
+		queryKey: ['posts'],
+		queryFn: async () => {
+			return (await fetch('/api/posts')).json();
+		}
+	});
 </script>
 
-{#if currentUser}
+{#if $currentUser && $query.status == 'success'}
 	<div class="container dark mx-auto p-8 space-y-8">
-		<h1 class="h1">Hello Skeleton {currentUser.name}</h1>
-		<PostsList {posts} />
+		<h1 class="h1">Hello Skeleton {$currentUser.name}</h1>
+		{$query.status}
+		{#if $query.status == 'success'}
+			<PostsList posts={$query.data.documents} />
+		{/if}
 	</div>
+{:else if !$currentUser}
+	Not Logged In
 {:else}
-	<div class='p-4 mx-auto self-center'><ProgressRadial /></div>
+	<div class="p-4 mx-auto self-center"><ProgressRadial /></div>
 {/if}

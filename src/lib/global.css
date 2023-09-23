@@ -23,9 +23,13 @@ h4 {
 }
 blockquote {
 	@apply blockquote;
-	@apply py-2;
+	@apply container;
 }
-code {
-	@apply code;
-	@apply py-1;
+
+.gradient-blue {
+	@apply bg-clip-text text-transparent box-decoration-clone;
+	/* Direction */
+	@apply bg-gradient-to-br;
+	/* Color Stops */
+	@apply from-teal-400 via-blue-600 to-blue-800;
 }

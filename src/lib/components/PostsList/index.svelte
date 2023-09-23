@@ -10,7 +10,7 @@ let value: string = 'post';
 <div class='card p-4'>
     <ListBox>
         {#each posts as post}
-            <ListBoxItem bind:group={value} value={post.title} name='post_title'>{post.title}</ListBoxItem>
+            <a href={`/post/${post.$id}`}><ListBoxItem bind:group={value} value={post.title} name='post_title'>{post.title}</ListBoxItem></a>
         {/each}
     </ListBox>
 </div>
