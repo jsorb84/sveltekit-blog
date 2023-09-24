@@ -7,6 +7,7 @@
 	import appwrite from '$lib/appwrite';
 	import type { User } from '$lib/types/User';
 	import { writable, type Writable } from 'svelte/store';
+	import Index from '$lib/components/CodeBlock/index.svelte';
 	let usrStore = writable<User | null>(null);
 	setContext('currentUser', usrStore);
 	onMount(async () => {
@@ -26,9 +27,12 @@
 <QueryClientProvider {client}>
 	<AppShell class="dark" regionPage="scroll-smooth">
 		<svelte:fragment slot="header">
-			<AppBar>
-				<svelte:fragment slot="lead"><a href="/">My Blog {$usrStore?.email}</a></svelte:fragment>
-			</AppBar>
+			{#if $usrStore !== null}
+				<AppBar>
+					<svelte:fragment slot="lead"><a href="/">My Blog</a></svelte:fragment>
+					<svelte:fragment slot="trail">{$usrStore?.name}</svelte:fragment>
+				</AppBar>
+			{/if}
 		</svelte:fragment>
 		<svelte:fragment slot="sidebarLeft" />
 		<!-- (sidebarRight) -->

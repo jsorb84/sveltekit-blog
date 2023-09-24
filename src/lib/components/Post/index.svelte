@@ -11,8 +11,8 @@
 		<div class="gradient-blue text-5xl font-extrabold">{post?.title}</div>
 		<MarkdownComponent body={post.body} />
 	</div>
-	<div class="sticky p-3 h-max">
-		<div class="sticky card px-4 py-2">
+	<div class="p-3 h-max">
+		<div class="fixed card px-4 py-2">
 			<TableOfContents />
 		</div>
 	</div>

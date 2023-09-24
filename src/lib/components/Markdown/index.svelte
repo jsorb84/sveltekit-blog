@@ -6,6 +6,8 @@
 	import Markdown from '@magidoc/plugin-svelte-marked';
 	import CodeBlock from '$lib/components/CodeBlock/index.svelte';
 	import CodeSpan from '$lib/components/CodeSpan/index.svelte';
+	import BlockQuote from '$lib/components/BlockQuote/index.svelte';
+	import PrimaryHeading from '$lib/components/PrimaryHeading/index.svelte';
 	storeHighlightJs.set(hljs);
 
 	marked.use(
@@ -24,12 +26,15 @@
 </script>
 
 <div class="p-6">
-	<pre class="pre">
+	<pre class="whitespace-pre-wrap">
         <Markdown
 			source={body}
 			renderers={{
 				code: CodeBlock,
-				codespan: CodeSpan
+				codespan: CodeSpan,
+				blockquote: BlockQuote,
+				h1: PrimaryHeading,
+				heading: PrimaryHeading
 			}}
 		/>
     </pre>
