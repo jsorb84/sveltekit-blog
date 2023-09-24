@@ -17,6 +17,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Recent Posts</title>
+</svelte:head>
+
 {#if $query.status == 'success'}
 	<div class="container dark mx-auto p-8 space-y-8">
 		<h1 class="h1">Recent Posts</h1>

@@ -13,6 +13,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^3.1.4",
 		"@magidoc/plugin-svelte-marked": "^4.1.0",
 		"@skeletonlabs/skeleton": "^2.1.0",
 		"@skeletonlabs/tw-plugin": "^0.2.0",

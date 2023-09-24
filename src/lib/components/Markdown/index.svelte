@@ -8,6 +8,7 @@
 	import CodeSpan from '$lib/components/CodeSpan/index.svelte';
 	import BlockQuote from '$lib/components/BlockQuote/index.svelte';
 	import PrimaryHeading from '$lib/components/PrimaryHeading/index.svelte';
+	import Link from '$lib/components/Anchor/index.svelte';
 	storeHighlightJs.set(hljs);
 
 	marked.use(
@@ -34,7 +35,8 @@
 				codespan: CodeSpan,
 				blockquote: BlockQuote,
 				h1: PrimaryHeading,
-				heading: PrimaryHeading
+				heading: PrimaryHeading,
+				link: Link
 			}}
 		/>
     </pre>

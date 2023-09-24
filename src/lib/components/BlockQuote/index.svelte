@@ -3,4 +3,4 @@
 	export let token: Tokens.Blockquote;
 </script>
 
-<div class="p-3"><blockquote class="blockquote bg-[#171618]">{token.text}</blockquote></div>
+<div class="py-4"><blockquote class="blockquote bg-[#171618]">{token.text}</blockquote></div>
