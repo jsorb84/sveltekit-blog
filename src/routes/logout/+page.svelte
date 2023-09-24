@@ -5,7 +5,7 @@
 		appwrite.accounts
 			.deleteSession('current')
 			.then(() => {
-				console.log('DOne');
+				return redirect(301, '/');
 			})
 			.catch((e) => console.error(e));
 	} catch (e) {

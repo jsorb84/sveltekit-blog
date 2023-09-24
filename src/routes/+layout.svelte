@@ -28,8 +28,19 @@
 	<AppShell class="dark" regionPage="scroll-smooth">
 		<svelte:fragment slot="header">
 			{#if $usrStore !== null}
-				<AppBar>
+				<AppBar
+					gridColumns="grid-cols-3"
+					slotDefault="place-self-center"
+					slotTrail="place-self-end"
+				>
 					<svelte:fragment slot="lead"><a href="/">My Blog</a></svelte:fragment>
+					<svelte:fragment slot="default"
+						><div class=" inline-flex gap-4">
+							<div><a href="/admin/editor">Markdown Editor</a></div>
+							<div><a href="/admin/create">New Post</a></div>
+						</div></svelte:fragment
+					>
+
 					<svelte:fragment slot="trail">{$usrStore?.name}</svelte:fragment>
 				</AppBar>
 			{/if}

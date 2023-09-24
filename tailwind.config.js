@@ -1,5 +1,6 @@
 import { skeleton } from '@skeletonlabs/tw-plugin';
 import { join } from 'path';
+import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: [
@@ -11,6 +12,7 @@ export default {
 		extend: {}
 	},
 	plugins: [
+		forms,
 		require('@tailwindcss/typography'),
 		skeleton({
 			themes: {
