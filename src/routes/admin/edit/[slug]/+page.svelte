@@ -1,11 +1,18 @@
 <script lang="ts">
-	import { createQuery } from '@tanstack/svelte-query';
+	import type { Categories, Category } from '$lib/types/Category';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	const payload: Categories = data.categories;
+	const { documents: categories }: { documents: Category[] } = payload;
 	let title = data.post ? data.post.title : '';
 	let description = data.post ? data.post.description : '';
 	let body = data.post ? data.post.body : '';
+	let checkedCats: string[] = [];
+
+	data.post?.categories?.map((c) => {
+		checkedCats.push(c.$id);
+	});
 </script>
 
 {#if data.post === null}
@@ -26,11 +33,26 @@
 			/>
 		</div>
 		<div class="py-3">
-			<textarea class="textarea" bind:value={body} id="body" name="body" placeholder="Post Body" />
+			<select bind:value={checkedCats} multiple name="categories" id="categories" class="select">
+				{#each categories as cat (cat.$id)}
+					<option value={cat.$id}>{cat.name}</option>
+				{/each}
+			</select>
 		</div>
 		<div class="py-3">
 			<textarea
 				class="textarea"
+				rows="16"
+				bind:value={body}
+				id="body"
+				name="body"
+				placeholder="Post Body"
+			/>
+		</div>
+		<div class="py-3">
+			<textarea
+				class="textarea"
+				rows="4"
 				bind:value={description}
 				id="description"
 				name="description"

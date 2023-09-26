@@ -1,12 +1,9 @@
 <script lang="ts">
 	import type { Post } from '$lib/types/Post';
-	import type { User } from '$lib/types/User';
-	import Icon from '@iconify/svelte';
+
 	import PostItem from '$lib/components/PostListItem/index.svelte';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+
 	export let posts: Post[];
-	let currentUser = getContext<Writable<User | null>>('currentUser');
 </script>
 
 <div class="grid grid-cols-3 gap-8">

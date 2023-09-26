@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import * as appwrite from '$lib/appwrite';
 	import type { User } from '$lib/types/User';
 	import { getContext, setContext } from 'svelte';
@@ -8,7 +10,9 @@
 	let email = '';
 	let password = '';
 	const handleLogin = async () => {
-		const user = await appwrite.default.accounts.createEmailSession(email, password);
+		const user = appwrite.default.accounts.createEmailSession(email, password).then(() => {
+			if (browser) goto('/');
+		});
 	};
 </script>
 

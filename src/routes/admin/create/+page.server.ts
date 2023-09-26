@@ -7,6 +7,7 @@ async function createPost(data: {
 	title: FormDataEntryValue;
 	body: FormDataEntryValue;
 	description: FormDataEntryValue;
+	categories?: FormDataEntryValue[];
 }): Promise<Post> {
 	const newPost: Post = await db.createDocument(DATABASE_ID, POSTS_COLLECTION, ID.unique(), data);
 	return newPost;
@@ -18,8 +19,10 @@ export const actions: Actions = {
 		const title: FormDataEntryValue | null = data.get('title');
 		const body: FormDataEntryValue | null = data.get('body');
 		const description: FormDataEntryValue | null = data.get('description');
+		const categories: FormDataEntryValue[] = data.getAll('categories');
+
 		if (title && description && body) {
-			const newObject = { title, body, description };
+			const newObject = { title, body, description, categories };
 			const newPost: Post = await createPost(newObject);
 			console.log(newPost);
 		}

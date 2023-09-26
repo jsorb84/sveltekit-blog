@@ -1,13 +1,13 @@
 <script lang="ts">
 	import '$lib/global.css';
-	import { AppBar, AppShell } from '@skeletonlabs/skeleton';
+	import { AppBar, AppShell, Modal, Toast, initializeStores } from '@skeletonlabs/skeleton';
 	import { browser } from '$app/environment';
 	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
 	import { onMount, setContext } from 'svelte';
 	import appwrite from '$lib/appwrite';
 	import type { User } from '$lib/types/User';
-	import { writable, type Writable } from 'svelte/store';
-	import Index from '$lib/components/CodeBlock/index.svelte';
+	import { writable } from 'svelte/store';
+	initializeStores();
 	let usrStore = writable<User | null>(null);
 	setContext('currentUser', usrStore);
 	onMount(async () => {
@@ -25,6 +25,8 @@
 </script>
 
 <QueryClientProvider {client}>
+	<Modal />
+	<Toast />
 	<AppShell class="dark" regionPage="scroll-smooth">
 		<svelte:fragment slot="header">
 			{#if $usrStore !== null}
@@ -41,7 +43,12 @@
 						</div></svelte:fragment
 					>
 
-					<svelte:fragment slot="trail">{$usrStore?.name}</svelte:fragment>
+					<svelte:fragment slot="trail">
+						<div class="flex gap-3">
+							{$usrStore?.name}
+							<a href="/logout">Logout</a>
+						</div>
+					</svelte:fragment>
 				</AppBar>
 			{/if}
 		</svelte:fragment>

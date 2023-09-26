@@ -25,5 +25,8 @@
 {#if $query.status === 'error' || post === null}
 	Error...
 {:else if post !== null}
+	<div class="flex p-10">
+		<a href="/" class="btn btn-lg variant-outline-tertiary p-5">⬅️ Back To Posts</a>
+	</div>
 	<PostComponent {post} />
 {/if}
